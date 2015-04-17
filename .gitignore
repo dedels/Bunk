@@ -1,0 +1,8 @@
+*.exe
+*.dll
+bin/
+obj/
+*.suo
+*.ini
+.git_old
+TestResults
