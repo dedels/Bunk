@@ -22,7 +22,7 @@ namespace Bunk
                 msg = resp_stream.ReadToEnd();
                 if (String.IsNullOrEmpty(msg)) 
                     throw ex;
-                var resp_j = JsonConvert.DeserializeObject<Bunk.CouchBuiltinResponses.OK>(msg);
+                var resp_j = JsonConvert.DeserializeObject<Bunk.CouchBuiltins.OK>(msg);
 
                 msg = resp_j.reason ?? resp_j.error ?? ex.Message;
             }
@@ -35,6 +35,10 @@ namespace Bunk
                 throw new InternalServerException(msg, ex);
             else if (resp.StatusCode == HttpStatusCode.BadRequest)
                 throw new BadRequestException(msg, ex);
+            else if (resp.StatusCode == HttpStatusCode.PreconditionFailed)
+                throw new PreconditionFailedException(msg, ex);
+            else if (resp.StatusCode == HttpStatusCode.Forbidden)
+                throw new ForbiddenException(msg, ex);
             else
                 throw ex;
         }
@@ -81,5 +85,15 @@ namespace Bunk
     public class AttachmentException : BunkException
     {
         internal AttachmentException(String msg) : base(msg) { }
+    }
+
+    public class PreconditionFailedException : BunkException
+    {
+        public PreconditionFailedException(string msg, Exception ex) : base(msg, ex) { }
+    }
+
+    public class ForbiddenException : BunkException
+    {
+        public ForbiddenException(string msg, Exception ex) : base(msg, ex) { }
     }
 }

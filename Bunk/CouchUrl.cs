@@ -39,11 +39,11 @@ namespace Bunk
         }
 
 
-        internal CouchUrl Add(params string[] collection)
+        public CouchUrl Add(params string[] collection)
         {
             return this.AddRange(collection);
         }
-        internal CouchUrl AddRange(IEnumerable<string> collection)
+        public CouchUrl AddRange(IEnumerable<string> collection)
         {
             return Create(this.couchRepo, ListModule.Append<string>(this.path, ListModule.OfSeq(collection)), this.queryString, this.filters);
         }

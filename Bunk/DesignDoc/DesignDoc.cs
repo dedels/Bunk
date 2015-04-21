@@ -29,7 +29,7 @@ namespace Bunk.Design
         }
 
 
-        public async Task<CouchBuiltinResponses.OKDocument> Upload()
+        public async Task<CouchBuiltins.OKDocument> Upload()
         {
             var new_dd = (DesignDoc)this.MemberwiseClone();
 

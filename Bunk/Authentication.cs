@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bunk.CouchBuiltins;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Bunk
             this.couchRepo = couchRepo;
         }
 
+        #region "Session methods"
         public async Task<List<string>> LoginSession(string username, string password)
         {
             var auth_url = this.couchRepo.couchUrl
@@ -31,5 +33,18 @@ namespace Bunk
             else return resp.Cookies.ToList();
         }
 
+        public async Task<Session> Session()
+        {
+            var resp = await this.couchRepo.HttpClient.Get(this.couchRepo.couchUrl.Add("_session"));
+            return couchRepo.Deserialize<Session>(resp);
+        }
+
+        public async Task LogoutSession()
+        {
+            await this.couchRepo.HttpClient.Delete(this.couchRepo.couchUrl.Add("_session"));
+        }
+        #endregion
+
     }
+
 }

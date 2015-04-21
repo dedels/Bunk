@@ -128,8 +128,6 @@ namespace Bunk.Design
 
     public class MapFunction<EmitType, ObjType> : ViewFunction 
     {
-        private string p;
-
         public string mapText { get; private set; }
 
         public MapFunction(string text) : base()
@@ -193,16 +191,16 @@ namespace Bunk.Design
 
 
         #region Invoke actions!
-        public Task<ViewResults<EmitType, ObjType, DocType>> Get()
+        public new Task<ViewResults<EmitType, ObjType, DocType>> Get()
         {
             return this.mapFunction.dd.GetView<ViewResults<EmitType, ObjType, DocType>>(this.mapFunction);
         }
         
-        public Task<ViewResults<EmitType, ObjType, DocType>> GetKeys(params EmitType[] keys)
+        public new Task<ViewResults<EmitType, ObjType, DocType>> GetKeys(params EmitType[] keys)
         {
             return this.GetKeys((IEnumerable<EmitType>)keys);
         }
-        public Task<ViewResults<EmitType, ObjType, DocType>> GetKeys(IEnumerable<EmitType> keylist)
+        public new Task<ViewResults<EmitType, ObjType, DocType>> GetKeys(IEnumerable<EmitType> keylist)
         {
             var keys = new KeyList<EmitType>(keylist);
             return this.dd.PostView<ViewResults<EmitType, ObjType, DocType>>(this.mapFunction, keys);

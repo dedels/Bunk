@@ -98,12 +98,12 @@ namespace Bunk
             this.rev = rev;
         }
 
-        public Task<Bunk.CouchBuiltinResponses.OKDocument> Put(string attachment_name, string content_type, string data)
+        public Task<Bunk.CouchBuiltins.OKDocument> Put(string attachment_name, string content_type, string data)
         {
             return this.Put(attachment_name, content_type, Encoding.UTF8.GetBytes(data));
         }
         
-        public Task<Bunk.CouchBuiltinResponses.OKDocument> Put(string attachment_name, string content_type, byte[] data)
+        public Task<Bunk.CouchBuiltins.OKDocument> Put(string attachment_name, string content_type, byte[] data)
         {
             if (this.rev == null) throw new BunkException("When putting an attachment, rev is required.");
 

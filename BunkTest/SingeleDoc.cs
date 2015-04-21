@@ -11,7 +11,7 @@ namespace BunkTest
     {
         protected DB db;
 
-        public async Task<Bunk.CouchBuiltinResponses.OK> RecreateDB()
+        public async Task<Bunk.CouchBuiltins.OK> RecreateDB()
         {
             var dbi = await this.db.DBInfo();
             if (dbi.exists == true)

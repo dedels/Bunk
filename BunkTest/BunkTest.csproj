@@ -59,6 +59,7 @@
     <Compile Include="BulkDocs.cs" />
     <Compile Include="Attachments.cs" />
     <Compile Include="Continuous.cs" />
+    <Compile Include="AuthenticationRolesTest.cs" />
     <Compile Include="RepoActions.cs" />
     <Compile Include="AuthenticationTest.cs" />
     <Compile Include="ViewTesting.cs" />
@@ -70,6 +71,10 @@
     <Compile Include="BuildDesignDoc.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BunkCloudant\BunkCloudant.csproj">
+      <Project>{54f571e6-9f4b-4b8d-bf75-fa32966b4549}</Project>
+      <Name>BunkCloudant</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bunk\Bunk.csproj">
       <Project>{6c03e248-00f6-4f46-a3c0-85724b0af845}</Project>
       <Name>Bunk</Name>

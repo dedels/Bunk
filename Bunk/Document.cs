@@ -17,14 +17,14 @@ namespace Bunk
     public class Document :IDocument, ICloneable
     {
         [JsonProperty("_id")]
-        public string ID
+        public virtual string ID
         {
             get;
             set;
         }
 
         [JsonProperty("_rev", NullValueHandling = NullValueHandling.Ignore)]
-        public string REV
+        public virtual string REV
         {
             get;
             set;
@@ -32,14 +32,14 @@ namespace Bunk
 
         private string _type=null;
         [JsonProperty("type")]
-        public string TYPE
+        public virtual string TYPE
         {
             get { return this._type = (this._type ?? this.GetType().Name); }
             set { this._type = value; } 
         }
 
         [JsonProperty("_deleted", DefaultValueHandling=DefaultValueHandling.Ignore)]
-        public bool Deleted
+        public virtual bool Deleted
         {
             get;
             internal set;

@@ -71,7 +71,7 @@ namespace Bunk
             return JsonConvert.DeserializeObject<T>(js_string);
         }
 
-        internal T Deserialize<T>(CouchResponse response)
+        public T Deserialize<T>(CouchResponse response)
         {
             using (var inputStream = new JsonTextReader(new System.IO.StreamReader(response.Stream)))
             {
@@ -79,6 +79,11 @@ namespace Bunk
             }
         }
 
+
+        public UsersMaintenance UserMaintenance()
+        {
+            return new UsersMaintenance(this);
+        }
 
         public Authentication Authentication()
         {

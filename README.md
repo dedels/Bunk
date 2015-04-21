@@ -7,6 +7,7 @@ All web requests are done using HttpWebRequest Async methods, and JSON decoded u
 For example usage, take a look at BunkTest.  Basic respository and DB operations are supported as well as Views, BulkDocs, DesignDocs, Attachments and Continuous feeds.
 
 TODO:
+
 1.  Get library to work with ASP.NET so AuthSession can come from a user Cookie
 2.  Cloudant specific support (indexes, creating users, permissions)
 3.  More use of GenericDocument (a wrapped Json.NET JObject).

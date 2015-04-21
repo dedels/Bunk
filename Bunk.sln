@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bunk", "Bunk\Bunk.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunkTest", "BunkTest\BunkTest.csproj", "{6DDF0918-9F9A-4AA2-9CE3-7CFD393D3819}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunkCloudant", "BunkCloudant\BunkCloudant.csproj", "{54F571E6-9F4B-4B8D-BF75-FA32966B4549}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{6DDF0918-9F9A-4AA2-9CE3-7CFD393D3819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DDF0918-9F9A-4AA2-9CE3-7CFD393D3819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DDF0918-9F9A-4AA2-9CE3-7CFD393D3819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F571E6-9F4B-4B8D-BF75-FA32966B4549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F571E6-9F4B-4B8D-BF75-FA32966B4549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F571E6-9F4B-4B8D-BF75-FA32966B4549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F571E6-9F4B-4B8D-BF75-FA32966B4549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

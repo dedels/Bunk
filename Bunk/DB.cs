@@ -1,4 +1,4 @@
-﻿using Bunk.CouchBuiltinResponses;
+﻿using Bunk.CouchBuiltins;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
