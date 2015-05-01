@@ -18,9 +18,13 @@ namespace BunkTest.Authentication
             var repo = CouchRepo.Connect(cfg);
 
             var aresp = await repo.Authentication().LoginSession("onek", "36633663");
-            Assert.IsTrue((from s in aresp
-                           where s.StartsWith("AuthSession")
-                           select s).Any(), "AuthSession should have bene returned");
+            foreach (System.Net.Cookie c in aresp)
+            {
+                Console.WriteLine("Cookie[{0}] = {1}", c.Name, c.Value);
+                if (c.Name == "AuthSession")
+                    return;
+            }
+            Assert.IsTrue(false, "AuthSession not found");
         }
 
         [TestMethod]

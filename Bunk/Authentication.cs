@@ -17,11 +17,15 @@ namespace Bunk
         }
 
         #region "Session methods"
-        public async Task<List<string>> LoginSession(string username, string password)
+        public async Task<System.Net.CookieCollection> LoginSession(string username, string password)
         {
             var auth_url = this.couchRepo.couchUrl
                 .Add("_session")
-                .ContentType("application/x-www-form-urlencoded");
+                .ContentType("application/x-www-form-urlencoded")
+                .Filter(wr => {
+                    ((System.Net.HttpWebRequest)wr).CookieContainer = new System.Net.CookieContainer();
+                    return wr;
+                });
 
             var resp = await this.couchRepo.HttpClient.Post(auth_url, (stream) =>
             {
@@ -29,8 +33,7 @@ namespace Bunk
                     sw.Write(string.Format("name={0}&password={1}", username, password));
             });
 
-            if (resp.Cookies==null) return new List<String>();
-            else return resp.Cookies.ToList();
+            return resp.Cookies;
         }
 
         public async Task<Session> Session()

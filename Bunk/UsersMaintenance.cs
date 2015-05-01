@@ -22,5 +22,11 @@ namespace Bunk
         {
             return this.Put(user);
         }
+
+        public async Task<IEnumerable<User>> AllUsers()
+        {
+            var users = await this.AllDocs().IncludeDocs<User>().Get();
+            return users.Documents;
+        }
     }
 }

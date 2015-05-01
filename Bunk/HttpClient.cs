@@ -21,11 +21,11 @@ namespace Bunk
             this.couchRepo = couchRepo;
         }
 
-        public string[] Cookies 
+        public CookieCollection Cookies 
         { 
             get
             {
-                return this.Response.Headers.GetValues("Set-Cookie");
+                return ((HttpWebResponse)this.Response).Cookies;
             } 
         }
 

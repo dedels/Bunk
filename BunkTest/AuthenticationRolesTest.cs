@@ -20,7 +20,8 @@ namespace BunkTest.AuthenticationRoles
             var u = new Bunk.CouchBuiltins.User();
             u.SetPassword("abc");
             u.Name = Rand.RandString("testuser");
-            u.Roles = new List<string>() { "abc", "def", "_reader" };
+            u.Roles = new List<string>() { "abc", "def"};
+            u.GrantReader();
             
             var resp = await this.db.couchRepo.UserMaintenance().AddUser(u);
             var repo_testuser = CouchRepo.Connect(new ConnectionConfig(Config.Get().Uri.ToString(), u.Name, "abc"));
@@ -39,7 +40,8 @@ namespace BunkTest.AuthenticationRoles
             var u = new Bunk.CouchBuiltins.User();
             u.SetPassword("abc");
             u.Name = Rand.RandString("testuser");
-            u.Roles = new List<string>() { "abc", "def", "_writer" };
+            u.Roles = new List<string>() { "abc", "def" };
+            u.GrantWriter();
 
             var resp = await this.db.couchRepo.UserMaintenance().AddUser(u);
             var repo_testuser = CouchRepo.Connect(new ConnectionConfig(Config.Get().Uri.ToString(), u.Name, "abc"));
@@ -52,6 +54,21 @@ namespace BunkTest.AuthenticationRoles
 
             test_doc = await repo_testuser.DB(db.name).Get<GenericDocument>(test_doc.ID);
             Assert.IsTrue(false, "Should have thrown an forbidden failure for writers");
+        }
+
+        [TestMethod]
+        public async Task Auth_ListUsers()
+        {
+            var u = new Bunk.CouchBuiltins.User();
+            u.SetPassword("abc");
+            u.Name = Rand.RandString("testuser");
+            u.Roles = new List<string>() { "abc", "def" };
+            var resp = await this.db.couchRepo.UserMaintenance().AddUser(u);
+
+            var ulist= await this.db.couchRepo.UserMaintenance().AllUsers();
+            Assert.IsTrue((from us in ulist
+                           where us.Name == u.Name
+                           select us).Any(), "Uploaded user should appear in list of all users");
         }
     }
 }
