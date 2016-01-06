@@ -32,6 +32,12 @@ namespace Bunk.CouchBuiltins
         public string ID { get; set; }
         [JsonProperty("rev")]
         public string REV { get; set; }
+
+        public void ThrowOnError()
+        {
+            if (!ok)
+                throw new BunkException($"{this.error}: {this.reason}");
+        }
     }
 
 #pragma warning disable 169

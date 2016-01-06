@@ -39,6 +39,8 @@ namespace Bunk
                 throw new PreconditionFailedException(msg, ex);
             else if (resp.StatusCode == HttpStatusCode.Forbidden)
                 throw new ForbiddenException(msg, ex);
+            else if (resp.StatusCode == HttpStatusCode.Conflict)
+                throw new ConflictException(msg, ex);
             else
                 throw ex;
         }
@@ -52,6 +54,12 @@ namespace Bunk
 
     }
 
+    public class ConflictException : BunkException
+    {
+        internal ConflictException(string msg, System.Net.WebException ex)
+            : base(msg, ex)
+        { }
+    }
     public class NotFoundException : BunkException
     {
         internal NotFoundException(string msg, System.Net.WebException ex)

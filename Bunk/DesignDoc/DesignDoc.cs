@@ -111,7 +111,8 @@ namespace Bunk.Design
                         IEmbedDesign pembed = null;
 
                         var prop = mem as System.Reflection.PropertyInfo;
-                        if (prop != null) pembed = prop.GetValue(true) as IEmbedDesign;
+                        if (prop != null)
+                            pembed = prop.GetValue(this) as IEmbedDesign;
                         else
                         {
                             var field = mem as System.Reflection.FieldInfo;

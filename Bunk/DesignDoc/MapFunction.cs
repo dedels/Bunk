@@ -126,6 +126,7 @@ namespace Bunk.Design
     }
 
 
+
     public class MapFunction<EmitType, ObjType> : ViewFunction 
     {
         public string mapText { get; private set; }
@@ -139,8 +140,6 @@ namespace Bunk.Design
         {
             return new JObject { { "map", this.mapText } };
         }
-
-
 
 
         public MapFunction<EmitType, ObjType, DocType> IncludeDocs<DocType>()
@@ -221,6 +220,5 @@ namespace Bunk.Design
             return this.dd.GetView<ViewResults<string, DocumentResponse>>(this);
         }
     }
-
 
 }

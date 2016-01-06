@@ -36,9 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Bunk\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Grade\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -62,6 +62,7 @@
     <Compile Include="AuthenticationRolesTest.cs" />
     <Compile Include="RepoActions.cs" />
     <Compile Include="AuthenticationTest.cs" />
+    <Compile Include="MapActions.cs" />
     <Compile Include="ViewTesting.cs" />
     <Compile Include="GenericDocument.cs" />
     <Compile Include="CouchConn.cs" />
@@ -79,6 +80,9 @@
       <Project>{6c03e248-00f6-4f46-a3c0-85724b0af845}</Project>
       <Name>Bunk</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
