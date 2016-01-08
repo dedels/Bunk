@@ -14,10 +14,10 @@ namespace BunkTest.Authentication
         [TestMethod]
         public async Task Auth_CookieLogin()
         {
-            var cfg = new ConnectionConfig("http://onek.cloudant.com");
+            var cfg = new ConnectionConfig(Config.Url());
             var repo = CouchRepo.Connect(cfg);
 
-            var aresp = await repo.Authentication().LoginSession("onek", "36633663");
+            var aresp = await repo.Authentication().LoginSession(Config.UserName(), Config.Password());
             foreach (System.Net.Cookie c in aresp)
             {
                 Console.WriteLine("Cookie[{0}] = {1}", c.Name, c.Value);

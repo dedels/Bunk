@@ -17,6 +17,12 @@ namespace Bunk
 
             return this.Get<User>(u.ID);
         }
+        public Task<T> GetUser<T>(string name) where T :User
+        {
+            var u = new User() { Name = name };
+
+            return this.Get<T>(u.ID);
+        }
 
         public Task<OKDocument> AddUser(User user)
         {

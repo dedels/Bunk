@@ -11,12 +11,13 @@ namespace BunkTest
     class Config
     {
         private static ConnectionConfig cfg;
-     
+
+        private static Dictionary<string, string> configDict;
         public static ConnectionConfig Get()
         {
             if (cfg == null)
             {
-                var config = new Dictionary<string, string>();
+                configDict = new Dictionary<string, string>();
 
                 using(var ini_fs = System.IO.File.OpenText("../../TestSettings.ini")){
                     while (!ini_fs.EndOfStream)
@@ -24,14 +25,18 @@ namespace BunkTest
                         var line = ini_fs.ReadLine();
                         var parts = line.Split(new char[] { '=' }, 2);
                         if (parts.Length < 2) continue;
-                        config[parts[0].Trim()] = parts[1].Trim(); ;
+                        configDict[parts[0].Trim()] = parts[1].Trim(); ;
                     }
                 }
 
-                cfg = new ConnectionConfig(config["url"], config["username"], config["password"]);
+                cfg = new ConnectionConfig(configDict["url"], configDict["username"], configDict["password"]);
             }
             return cfg;
         }
+
+        public static Uri Url() { Get(); return new Uri(configDict["url"]); }
+        public static string UserName() { Get(); return configDict["username"]; }
+        public static string Password() { Get(); return configDict["password"]; }
 
     }
 

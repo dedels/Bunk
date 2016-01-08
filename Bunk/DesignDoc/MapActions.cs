@@ -99,5 +99,25 @@ namespace Bunk.DesignDoc
             }
             return item;
         }
+
+
+        public static async Task<ResultT> ThroughFactory<EmitType, ResultT>(
+            this Task<ViewResults<EmitType, GenericDocument>> resultsTask,
+            MapActions<ResultT> mapActions,
+            ResultT item)
+        {
+            return ThroughFactory(await resultsTask, mapActions, item);
+        }
+        public static ResultT ThroughFactory<EmitType, ResultT>(
+            this ViewResults<EmitType, GenericDocument> results,
+            MapActions<ResultT> mapActions,
+            ResultT item)
+        {
+            foreach (var r in results.Rows)
+            {
+                mapActions.RunMapAction(item, r.Value);
+            }
+            return item;
+        }
     }
 }

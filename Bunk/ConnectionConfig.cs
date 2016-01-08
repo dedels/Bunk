@@ -8,10 +8,12 @@ namespace Bunk
 {
     public class ConnectionConfig
     {
+        public ConnectionConfig(Uri url) {
+            this.Uri = url;
+        }
         public ConnectionConfig(string url, string username=null, string password=null, bool use_proxy=true)
         {
             this.Uri = new Uri(url);
-            this.DefaultFilters = new List<CouchFilter>();
 
             if (!string.IsNullOrEmpty(username))
                 this.DefaultFilters.Add((req) =>
@@ -33,7 +35,7 @@ namespace Bunk
         }
 
         public Uri Uri { get; private set; }
-        public List<CouchFilter> DefaultFilters {get; private set; }
+        public List<CouchFilter> DefaultFilters { get; } = new List<CouchFilter>();
     }
 
 }

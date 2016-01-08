@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AlternateSession.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="BulkDocs.cs" />
     <Compile Include="Attachments.cs" />
