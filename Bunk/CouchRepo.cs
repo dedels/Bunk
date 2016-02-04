@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bunk
 {
-    public class CouchRepo
+    public class CouchRepo : ICouchRepo
     {
         private CouchRepo(ConnectionConfig config) { 
             this.config = config;

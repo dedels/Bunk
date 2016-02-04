@@ -97,8 +97,7 @@ namespace Bunk.CouchBuiltins
             set {this._name=value.Replace("org.couchdb.user:", ""); } 
         }
         [JsonProperty("roles")]
-        private List<string> _roles = null;
-        public List<string> Roles { get { return this._roles ?? new List<string>(); } set { this._roles = value; } }
+        public List<string> Roles { get; set; } = new List<string>();
         [JsonProperty("password_sha")]
         public string PasswordSha { get; set; }
         [JsonProperty("password_scheme")]
@@ -122,12 +121,6 @@ namespace Bunk.CouchBuiltins
         }
         public User GrantRole(string role)
         {
-            if (this.Roles == null)
-            {
-                this.Roles = new List<string>();
-                this.Roles.Add(role);
-                return this;
-            }
             if (this.Roles.IndexOf(role) > 0)
                 return this;
 

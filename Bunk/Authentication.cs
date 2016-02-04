@@ -17,6 +17,10 @@ namespace Bunk
         }
 
         #region "Session methods"
+        private string urlEncode(string str)
+        {
+            return str.Replace("%", "%25").Replace(".", "%2E").Replace("&", "%26").Replace("?", "?3F");
+        }
         public async Task<System.Net.CookieCollection> LoginSession(string username, string password)
         {
             var auth_url = this.couchRepo.couchUrl
@@ -29,8 +33,9 @@ namespace Bunk
 
             var resp = await this.couchRepo.HttpClient.Post(auth_url, (stream) =>
             {
+                
                 using(var sw = new System.IO.StreamWriter(stream))
-                    sw.Write(string.Format("name={0}&password={1}", username, password));
+                    sw.Write(string.Format("name={0}&password={1}", urlEncode(username), urlEncode(password)));
             });
 
             return resp.Cookies;

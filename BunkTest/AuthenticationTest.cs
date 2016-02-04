@@ -28,6 +28,46 @@ namespace BunkTest.Authentication
         }
 
         [TestMethod]
+        public async Task Auth_CreateUserAndLoginCookies()
+        {
+            var adminRepo = CouchRepo.Connect(Config.Get());
+            try
+            {
+                await adminRepo.UserMaintenance().CreateDB();
+                Console.WriteLine("Create _users db");
+            }
+            catch (BunkException ex) { }
+
+            var new_user = new Bunk.CouchBuiltins.User() { Name = Rand.RandString("auth_test_user"), Roles = new List<string>() { "test-role1", "test-role2" } };
+            try {
+                new_user.SetPassword("abc");
+                new_user.GrantReader().GrantWriter();
+                await adminRepo.UserMaintenance().AddUser(new_user);
+
+                //use admin authenticated repo
+                var aresp = await adminRepo.Authentication().LoginSession(new_user.Name, "abc");
+                Assert.IsNotNull(aresp["AuthSession"]);
+
+                //use unauth endpoint
+                var userAuthenticatedRepo = Bunk.CouchRepo.Connect(
+                    new TestSessionConfig(Config.Get().Uri, (wr) =>
+                    {
+                        var hwr = (System.Net.HttpWebRequest)wr;
+                        hwr.CookieContainer = new System.Net.CookieContainer();
+                        hwr.CookieContainer.Add(aresp);
+                        return wr;
+                    }));
+
+                var this_user_again = await userAuthenticatedRepo.UserMaintenance().GetUser(new_user.Name);
+                Assert.IsNotNull(this_user_again.ID);
+            }
+            finally
+            {
+                if(new_user.REV!= null)
+                    await adminRepo.UserMaintenance().Delete(new_user);
+            }
+        }
+        [TestMethod]
         public void Auth_UserPasswordExample()
         {
             //example from http://wiki.apache.org/couchdb/Security_Features_Overview

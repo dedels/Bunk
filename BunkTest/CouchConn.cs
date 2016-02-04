@@ -12,7 +12,7 @@ namespace BunkTest
         public async Task UnauthorizedCreateDB()
         {
             var repo = Bunk.CouchRepo.Connect(
-                new Bunk.ConnectionConfig("http://onek.cloudant.com", "invalid$$", "bad")
+                new Bunk.ConnectionConfig(Config.Url().ToString(), "invalid$$", "bad")
             );
             var testdb = repo.DB("bunk-test");
 

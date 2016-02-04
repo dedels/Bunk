@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace BunkTest
 {
+    public class TestSessionConfig : Bunk.ConnectionConfig
+    {
+        public TestSessionConfig(Uri url, Bunk.CouchFilter cf) : base(url)
+        {
+            this.DefaultFilters.Add(cf);
+        }
+    }
+
+
     [TestClass]
     public class AlternateSession :TempDBTest
     {
-        public class TestSessionConfig : Bunk.ConnectionConfig
-        {
-            public TestSessionConfig(Uri url, Bunk.CouchFilter cf) : base(url)
-            {
-                this.DefaultFilters.Add(cf);
-            }
-        }
+
 
         public Bunk.CouchRepo UnauthenticatedRepo => Bunk.CouchRepo.Connect(
             new TestSessionConfig(Config.Url(), (wr) =>

@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../BunkCloudant/BunkCloudant.csproj",
+      "bin": {
+        "assembly": "../../BunkCloudant/obj/{configuration}/BunkCloudant.dll",
+        "pdb": "../../BunkCloudant/obj/{configuration}/BunkCloudant.pdb"
+      },
+      "dependencies": {
+        "Newtonsoft.Json": "7.0.1",
+        "Bunk": "1.0.0-*"
+      }
+    }
+  }
+}

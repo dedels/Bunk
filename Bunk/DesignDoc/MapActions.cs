@@ -69,6 +69,8 @@ namespace Bunk.DesignDoc
 
         internal void RunMapAction(T item, GenericDocument gdoc)
         {
+            if (gdoc == null)
+                return;
             var ta = this._typeMap[gdoc.TYPE];
             var doc = gdoc.ToObject(ta.Type);
             ta.Action(item, doc);
